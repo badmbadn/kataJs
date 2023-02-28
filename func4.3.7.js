@@ -64,23 +64,22 @@ function renderElements(userData) {
     saveUsers(prevItem,userElement)
 }
 
-function closeBtn(usElemClick) {
+function closeBtn() {
     saveUsersList.addEventListener('click',(e) =>{
         
-    if (e.target.className != 'btn') return;
-
-    usElemClick = e.target.closest('.save-users__item');
-    usElemClick.remove();        
-    }
+        if (e.target.className != 'btn') return;
+        let saveElement =  e.target.closest('.save-users__item');
+        saveElement.remove();        
+        }
     )
 }
 
-function saveUsers(user,usElem) {   
-    usElem.addEventListener('click', () => {
+function saveUsers(user,userElement) {   
+    userElement.addEventListener('click', () => {
        saveUsersList.append(user)      
        input.value =''
        clearUsers()
-       closeBtn(user)       
+       closeBtn()      
     })
 }
 
