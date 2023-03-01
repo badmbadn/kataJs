@@ -91,7 +91,7 @@ async function loadUsers () {
             let data = await res.json()
                 if(data.items.length === 0) {
                     let searchError = createElement('li','error')
-                    searchError.insertAdjacentText('afterbegin',`по вашему запросу результатов не найдено`)
+                    searchError.insertAdjacentText('afterbegin','по вашему запросу результатов не найдено')
                     usersList.append(searchError)
                 }
                return data.items.forEach(el => {
@@ -105,7 +105,7 @@ async function loadUsers () {
     } catch(err) {
         let error = createElement('li','error')
         error.insertAdjacentText('afterbegin',`Error! Попробуйте позже`)
-        usersList.append(error)
+        usersList.prepend(error)
         console.warn(err)
     }
         
