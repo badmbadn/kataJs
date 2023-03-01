@@ -125,7 +125,14 @@ ul,ol,li {
 	transform: rotate(225deg);	
 }
 
-
+.search-error {
+	text-align: start;
+	padding: 5px;
+	font-size: 22px;
+	background-color: #FF0000;
+	width: 100%;
+	height: auto;
+}
 .error {
 	text-align: center;
 	height: auto;

@@ -32,8 +32,8 @@ function debounce (fn,ms,immediate) {
     }
 }
 
-function clearUsers() {  
-    usersList.innerHTML = '';   
+function clearUsers() {     
+    usersList.innerHTML = '';     
 }
 
 function createElement(elementTag,elementClass) {
@@ -74,9 +74,9 @@ function closeBtn() {
 
 function saveUsers(user,userElement) {   
     userElement.addEventListener('click', () => {
-       saveUsersList.append(user)      
-       input.value =''
-       clearUsers()
+       saveUsersList.append(user)  
+       clearUsers()    
+       input.value =''; 
        closeBtn()      
     })
 }
@@ -85,28 +85,27 @@ async function loadUsers () {
     try {
         const usersValue = input.value;
         clearUsers()
-
-        if(usersValue) {
+        if(usersValue && usersValue!== ' ') {            
             let res = await fetch(`https://api.github.com/search/repositories?q=${usersValue}&per_page=${USER_PER_PAGE}`)
             let data = await res.json()
-                if(data.items.length === 0) {
-                    let searchError = createElement('li','error')
-                    searchError.insertAdjacentHTML('beforeend',`<p>по вашему запросу результатов не найдено</p>`)
-                    usersList.append(searchError)
-                }
-               return data.items.forEach(el => {
-               return renderElements(el)})
-              
+            
+            if(data.items.length === 0) {   
+                let searchError = createElement('li')
+                searchError.insertAdjacentHTML('afterbegin',`<p class="search-error">по вашему запросу результатов нет</p>`)
+                usersList.append(searchError)
+            }
+            return data.items.forEach(el => renderElements(el))              
         } 
          else {
-            clearUsers()
+            clearUsers()        
         }   
 
-    } catch(err) {
-        let error = createElement('li','error')
-        error.insertAdjacentText('afterbegin',`Error! Попробуйте позже`)
-        usersList.prepend(error)
-        console.warn(err)
+    } catch(err) {   
+            let error = createElement('li','error')
+            error.insertAdjacentText('afterbegin',`Error! Попробуйте позже`)
+            usersList.prepend(error)
+            console.warn(err)  
+             
     }
         
 }
