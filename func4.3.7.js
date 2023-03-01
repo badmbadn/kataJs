@@ -106,7 +106,7 @@ async function loadUsers () {
         let error = createElement('li','error')
         error.insertAdjacentText('afterbegin',`Error! Попробуйте позже`)
         usersList.append(error)
-      //  console.warn(err)
+        console.warn(err)
     }
         
 }
