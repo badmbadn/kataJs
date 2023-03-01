@@ -89,8 +89,16 @@ async function loadUsers () {
         if(usersValue) {
             let res = await fetch(`https://api.github.com/search/repositories?q=${usersValue}&per_page=${USER_PER_PAGE}`)
             let data = await res.json()
-               return data.items.forEach(el => renderElements(el))
-        } else {
+                if(data.items.length === 0) {
+                    let searchError = createElement('li','error')
+                    searchError.insertAdjacentText('afterbegin',`по вашему запросу результатов не найдено`)
+                    usersList.append(searchError)
+                }
+               return data.items.forEach(el => {
+               return renderElements(el)})
+              
+        } 
+         else {
             clearUsers()
         }   
 
@@ -98,7 +106,7 @@ async function loadUsers () {
         let error = createElement('li','error')
         error.insertAdjacentText('afterbegin',`Error! Попробуйте позже`)
         usersList.append(error)
-        console.warn(err)
+      //  console.warn(err)
     }
         
 }
