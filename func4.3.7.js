@@ -1,6 +1,5 @@
 const app = document.getElementById('app');
 const input = createElement('input','search-input')
-
 const usersWrapper = createElement('div','users-wrapper')
 const usersList = createElement('ul','users')        
 usersWrapper.append(usersList)
@@ -65,8 +64,7 @@ function renderElements(userData) {
 }
 
 function closeBtn() {
-    saveUsersList.addEventListener('click',(e) =>{
-        
+    saveUsersList.addEventListener('click',(e) =>{        
         if (e.target.className != 'btn') return;
         let saveElement =  e.target.closest('.save-users__item');
         saveElement.remove();        
