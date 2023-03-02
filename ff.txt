@@ -1,14 +1,4 @@
-https://badmbadn.github.io/kataJs/
-
-
-
-
-
--------------------------------------------- 4.4.9 ----------------------------------------------
-
-
-1.Регистрация
-
+1.регистрация
 {
     "user": {
         "username": "badm",
@@ -21,16 +11,14 @@ curl --location 'https://blog.kata.academy/api/users' \
 --header 'Content-Type: application/json' \
 --data-raw '{
   "user": {
-    "username": "badm",
+    "username": "Badm",
     "email": "korn@gmail.com",
     "password": "123456"
   }
 }'
 
---------------------------------------------------------------------------------------------------
 
-2.Аутентификация 
-
+2.        
 {
     "user": {
         "username": "badm",
@@ -48,9 +36,8 @@ curl --location 'https://blog.kata.academy/api/users/login' \
   }
 }'
 
----------------------------------------------------------------------------------------------------
+3.
 
-3. Get запрос
 
 {
     "user": {
@@ -71,4 +58,6 @@ curl --location --request GET 'https://blog.kata.academy/api/user' \
     "password": "123456"
   }
 }'
+
+
 
