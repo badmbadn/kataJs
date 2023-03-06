@@ -125,15 +125,6 @@ ul,ol,li {
 	transform: rotate(225deg);	
 }
 
-.search-error {
-	text-align: center;
-	padding: 5px;
-	margin: 0;
-	font-size: 22px;
-	background-color: #FF0000;
-	width: 100%;
-	height: auto;
-}
 .error {
 	text-align: center;
 	height: auto;

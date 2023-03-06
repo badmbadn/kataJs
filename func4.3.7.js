@@ -33,7 +33,7 @@ function debounce (fn,ms,immediate) {
 }
 
 function clearUsers() {     
-    usersList.innerHTML = '';     
+    usersList.querySelectorAll('*').forEach(n => n.remove())    
 }
 
 function createElement(elementTag,elementClass) {
@@ -44,19 +44,26 @@ function createElement(elementTag,elementClass) {
     return element
 }
 
+function createCard(userData,innerRepo) {
+    const name = createElement('span')
+    name.textContent = `Name : ${userData.name}`;
+    const owner = createElement('span')
+    owner.textContent = `Owner : ${userData.owner.login}`;
+    const stars = createElement('span')
+    stars.textContent = `Stars : ${userData.stargazers_count}`
+
+    innerRepo.append(name,owner,stars)
+}
+
 function renderElements(userData) {
     const userElement = createElement('li','user-prev')
-    
-    userElement.insertAdjacentHTML('afterbegin',`${userData.name}`);
+    userElement.textContent = `${userData.name}`
     usersList.append(userElement)    
 
-    let prevItem = createElement('li','save-users__item')
-    prevItem.insertAdjacentHTML('afterbegin',
-    `<div class = "save-users__info"> <span> Name : ${userData.name} </span>
-                                    <span> Owner : ${userData.owner.login} </span> 
-                                    <span> Stars : ${userData.stargazers_count} </span>
-     </div>`                              
-    )
+    let prevItem = createElement('li','save-users__item')    
+    let innerRepo = createElement('div','save-users__info')
+    createCard(userData,innerRepo)
+    prevItem.prepend(innerRepo)
 
     let btn = createElement('button','btn')
     prevItem.append(btn)
@@ -90,9 +97,9 @@ async function loadUsers () {
             let data = await res.json()
             
             if(data.items.length === 0) {   
-                let searchError = createElement('li')
-                searchError.insertAdjacentHTML('afterbegin',`<p class="search-error">по вашему запросу результатов нет</p>`)
-                usersList.append(searchError)
+                let searchError = createElement('li','error')
+                searchError.textContent = `по вашему запросу результатов нет`
+                usersList.append(searchError) 
             }
             return data.items.forEach(el => renderElements(el))              
         } 
@@ -102,7 +109,7 @@ async function loadUsers () {
 
     } catch(err) {   
             let error = createElement('li','error')
-            error.insertAdjacentText('afterbegin',`Error! Попробуйте позже`)
+            error.textContent = `Error! Попробуйте позже`
             usersList.prepend(error)
             console.warn(err)  
              
